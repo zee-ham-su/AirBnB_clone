@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ definition of the City class
 """
+
 from models.base_model import BaseModel
 
 
