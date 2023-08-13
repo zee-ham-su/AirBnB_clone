@@ -18,6 +18,7 @@ from models.review import Review
 import console
 import json
 
+
 class TestConsole(unittest.TestCase):
     def setUp(self):
         """ Create file at the beginning of every test"""
