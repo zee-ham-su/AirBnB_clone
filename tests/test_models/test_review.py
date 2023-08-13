@@ -108,7 +108,8 @@ class TestReview(unittest.TestCase):
         self.rv.updated_at = dt + timedelta(days=1)
         rv_dict = self.rv.to_dict()
         self.assertEqual(dt.isoformat(), rv_dict["created_at"])
-        self.assertEqual((dt + timedelta(days=1)).isoformat(), rv_dict["updated_at"])
+        self.assertEqual((dt + timedelta(days=1)).isoformat(),
+                         rv_dict["updated_at"])
 
     def test_save_with_arg(self):
         """Test that calling save with an argument raises TypeError."""
