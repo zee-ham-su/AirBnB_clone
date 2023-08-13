@@ -66,7 +66,8 @@ class TestState(unittest.TestCase):
                 attribute_type = type(getattr(state_instance, attribute))
                 with self.subTest(attribute=attribute):
                     self.assertTrue(hasattr(state_instance, attribute))
-                    self.assertIsInstance(getattr(state_instance, attribute), attribute_type)
+                    self.assertIsInstance(getattr(state_instance, attribute),
+                                          attribute_type)
 
     def test_save(self):
         first_updated_at = self.st.updated_at

@@ -33,7 +33,8 @@ class TestBaseModel(unittest.TestCase):
     def test_args_unused(self):
         bm = BaseModel(None)
         unused_args = [arg for arg in bm.__dict__.values() if arg is None]
-        self.assertEqual(len(unused_args), 0, "Some arguments were left unused.")
+        self.assertEqual(len(unused_args), 0,
+                         "Some arguments were left unused.")
 
     def test_id_is_public_str(self):
         bm = BaseModel()
