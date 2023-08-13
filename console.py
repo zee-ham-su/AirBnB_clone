@@ -52,7 +52,8 @@ class HBNBCommand(cmd.Cmd):
                 command = "{} {}".format(class_name, user_input)
                 if method in argdict:
                     return argdict[method](command)
-                print("Method '{}' unrecognized for class '{}'".format(method, class_name))
+                print("Method '{}' unrecognized for class '{}'".
+                      format(method, class_name))
             else:
                 print("** class doesn't exist **")
         else:
@@ -216,7 +217,8 @@ class HBNBCommand(cmd.Cmd):
         class_name = args[0]
         if class_name in self.__classes:
             class_object = self.__classes[class_name]
-            instances_count = sum(1 for instance in storage.all().values() if isinstance(instance, class_object))
+            instances_count = sum(1 for instance in storage.all().values() if
+                                  isinstance(instance, class_object))
             print(instances_count)
         else:
             print("** class doesn't exist **")
