@@ -10,6 +10,7 @@ from time import sleep
 from models.place import Place
 from models.engine.file_storage import FileStorage
 from models import storage
+from models.base_model import BaseModel
 
 
 class TestPlace(unittest.TestCase):
@@ -28,6 +29,14 @@ class TestPlace(unittest.TestCase):
 
     def test_new_instance_stored_in_objects(self):
         self.assertIn(Place(), models.storage.all().values())
+
+    def test_8_instantiation(self):
+        """Tests instantiation of Place class."""
+
+        b = Place()
+        assert type(b) == Place
+        assert isinstance(b, Place)
+        assert issubclass(type(b), BaseModel)
 
     def test_id_is_public_str(self):
         pl = Place()
