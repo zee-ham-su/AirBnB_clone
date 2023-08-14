@@ -187,10 +187,10 @@ class HBNBCommand(cmd.Cmd):
         setattr(instance, attribute_name, attribute_value)
         instance.save()
 
-        if len(args) < 3:
+        if len(args) < 5:
             print("** dictionary representation missing **")
             return
-        dictionary_repr = ' '.join(args[2:])
+        dictionary_repr = ' '.join(args[4:])
         instance = all_instances[instance_key]
 
         try:
