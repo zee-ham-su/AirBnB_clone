@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from time import sleep
 from models.review import Review
 import models
+from models.base_model import BaseModel
 
 
 class TestReview(unittest.TestCase):
@@ -118,6 +119,14 @@ class TestReview(unittest.TestCase):
             review_instance.save(None)
 
         self.assertRaises(TypeError, save_with_arg)
+
+    def test_instantiate(self):
+        """Tests instantiation of State class."""
+
+        b = Review()
+        assert type(b) == Review
+        assert isinstance(b, Review)
+        assert issubclass(type(b), BaseModel)
 
 
 if __name__ == "__main__":

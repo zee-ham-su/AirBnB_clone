@@ -100,6 +100,14 @@ class TestState(unittest.TestCase):
         with self.assertRaises(TypeError):
             st.to_dict(None)
 
+    def test_instantiate(self):
+        """Tests instantiation of State class."""
+
+        b = State()
+        assert type(b) == State
+        assert isinstance(b, State)
+        assert issubclass(type(b), BaseModel)
+
 
 if __name__ == "__main__":
     unittest.main()
