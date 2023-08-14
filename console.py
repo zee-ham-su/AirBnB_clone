@@ -157,55 +157,47 @@ class HBNBCommand(cmd.Cmd):
         """Update an instance based on the class name, id, and
         dictionary representation"""
         args = user_input.split()
-        if len(args) < 4:
+        objdict = storage.all()
+
+        if len(args) == 0:
             print("** class name missing **")
-            return
-        class_name = args[0]
-        if class_name not in self.__classes:
+            return False
+        if args[0] not in self.__classes:
             print("** class doesn't exist **")
-            return
-        if len(args) < 2:
+            return False
+        if len(args) == 1:
             print("** instance id missing **")
-            return
-        instance_id = args[1]
-        instance_id = instance_id.strip('"')
-        all_instances = storage.all()
-        instance_key = f"{class_name}.{instance_id}"
-        if instance_key not in all_instances:
+            return False
+        instance_key = f"{args[0]}.{args[1]}"
+        if instance_key not in objdict:
             print("** no instance found **")
-            return
-        if len(args) < 3:
+            return False
+        if len(args) == 2:
             print("** attribute name missing **")
-            return
-        attribute_name = args[2]
-        if len(args) < 4:
+            return False
+        if len(args) == 3:
             print("** value missing **")
-            return
-        attribute_value = args[3]
+            return False
 
-        instance = all_instances[instance_key]
-        setattr(instance, attribute_name, attribute_value)
-        instance.save()
+        instance = objdict[instance_key]
+        setattr(instance, args[2], args[3])
+        storage.save()
 
-        if len(args) < 5:
-            print("** dictionary representation missing **")
-            return
-        dictionary_repr = ' '.join(args[4:])
-        instance = all_instances[instance_key]
+        if len(args) > 4:
+            dictionary_repr = ' '.join(args[4:])
+            try:
+                update_dict = eval(dictionary_repr)
+            except Exception as e:
+                print(f"Error evaluating dictionary representation: {e}")
+                return False
 
-        try:
-            update_dict = eval(dictionary_repr)
-        except Exception as e:
-            print(f"Error evaluating dictionary representation: {e}")
-            return
+            if not isinstance(update_dict, dict):
+                print("** invalid dictionary representation **")
+                return False
 
-        if not isinstance(update_dict, dict):
-            print("** invalid dictionary representation **")
-            return
-
-        for key, value in update_dict.items():
-            setattr(instance, key, value)
-        instance.save()
+            for key, value in update_dict.items():
+                setattr(instance, key, value)
+            storage.save()
 
     def do_count(self, user_input):
         """Counts the instances of a class."""
