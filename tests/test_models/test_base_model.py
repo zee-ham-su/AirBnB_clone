@@ -129,6 +129,26 @@ class TestBaseModel(unittest.TestCase):
         with open("file.json", "r") as file:
             self.assertIn(bmid, file.read())
 
+    def test_str_representation(self):
+        current_datetime = datetime.today()
+        current_datetime_repr = repr(current_datetime)
+
+        test_instance = BaseModel()
+        test_instance.id = "123456"
+        test_instance.created_at = test_instance.updated_at = current_datetime
+
+        str_representation = str(test_instance)
+
+        expected_strings = [
+            f"[BaseModel] (123456)",
+            f"'id': '123456'",
+            f"'created_at': {current_datetime_repr}",
+            f"'updated_at': {current_datetime_repr}"
+        ]
+
+        for expected_str in expected_strings:
+            self.assertIn(expected_str, str_representation)
+
 
 if __name__ == '__main__':
     unittest.main()
